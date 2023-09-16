@@ -5,30 +5,30 @@ import json
 
 load_dotenv()
 
-openai.api_key = os.getenv("OPENAIKEY")
+class TextAnalyser(object):
 
-# Define the list of keywords and the text to analyze
-keywords = ["banana", "golf", "mountain", "giraffe", "elephant"]
-text = "I want a banana. I don't want to play golf. I prefer giraffes to elephants."
+    openai.api_key = os.getenv("OPENAIKEY")
 
-prompt = (
-    "i will provide a list of keywords. i will then provide a text. can you provide sentiment towards each keyword from the text.\n" +
-    "keywords=" + str(keywords) + "\n" +
-    "text=\"" + text + "\"\n" +
-    "output the sentiment on a scale of -1 to 1. make the output a json serialised python dictionary with names enclosed in double quotes."
-)
+    keywords = [line.strip() for line in open('keywords.txt', 'r')]
 
-# Request sentiment analysis from GPT-3 in one API call
-response = openai.Completion.create(
-    engine="text-davinci-002",
-    prompt=prompt,
-    max_tokens=100  # Adjust as needed
-)
+    def __init__(self, inText) -> None:
+        self.text = inText
 
-# Extract and structure the sentiment analysis for each keyword
+    def getSents(self):
 
-# print(response)
+        self.sentiPrompt = (
+            "i will provide a list of keywords. i will then provide a text. provide sentiment towards each keyword from the text.\n" +
+            "keywords=" + str(self.keywords) + "\n" +
+            "text=\"" + self.text + "\"\n" +
+            "output the sentiment on a scale of -1 to 1. make the output a json serialised python dictionary with names enclosed in double quotes."
+        )
 
-sentiments = json.loads(response["choices"][0]["text"])
-
-print(sentiments.values())
+        # Request sentiment analysis from GPT-3 in one API call
+        response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt=self.sentiPrompt,
+            max_tokens=100  # Adjust as needed
+        )
+        # Extract and structure the sentiment analysis for each keyword
+        sentiments = json.loads(response["choices"][0]["text"])
+        return sentiments
