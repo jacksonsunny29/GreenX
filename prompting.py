@@ -18,7 +18,7 @@ class TextAnalyser(object):
     def getSents(self):
 
         self.sentiPrompt = (
-            "i will provide a list of keywords. i will then provide a text. provide sentiment towards each keyword from the text.\n" +
+            "i will provide a list of key words and phrases. i will then provide a text. provide sentiment towards each keyword from the text.\n" +
             "keywords=" + str(self.keywords) + "\n" +
             "text=\"" + self.text + "\"\n" +
             "output the sentiment on a scale of -1 to 1. make the output a json serialised python dictionary with names enclosed in double quotes."
