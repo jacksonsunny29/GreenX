@@ -14,7 +14,7 @@
     <h1>Greenfield Holiday Project</h1>
     <form method="POST">
         <label for="text_input">Holiday demands</label>
-        <input type="text" id="text_input" name="text_input" size="200" required><br><br>
+        <input type="text" id="text_input" name="text_input" size="200" {% if prev %}value="{{ prev }}"{% endif %} required><br><br>
         <input type="submit" value="Holiday!">
     </form>
     {% if result %}
