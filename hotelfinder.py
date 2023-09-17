@@ -21,4 +21,4 @@ class HotelFinder(object):
             print(dist) 
             dists.append(dist)
         print(dists)
-        return [hotelsID[i] for i in indeces],dists
+        return [(*hotelsID[i], dists[i]) for i in indeces]
