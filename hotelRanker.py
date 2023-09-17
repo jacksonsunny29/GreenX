@@ -40,7 +40,7 @@ for continent in data['geo']:
 
                     hotels_vector = (np.array([beautyAndWellness, modernDesign, waterSports, sport, beachFront,
                                               cityCenter, rural, directlyAtLake, family, luxury, wheelchairAccess,
-                                              parking, appartement, entertainment, ski]).astype(int) * 2 - 1) * 10
+                                              parking, appartement, entertainment, bar, ski]).astype(int) * 2 - 1) * 10
 
                     hotelsVectors.append(hotels_vector)
                     hotelsID.append((hotels['publicId'], hotels["coordinates"], sustainabilityHeuristic, hotels["name"]))
