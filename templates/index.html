@@ -2,12 +2,19 @@
 <html>
 <head>
     <title>GreenX</title>
+
+    <style type="text/css">
+        h1 {
+            background-color: lightgreen;
+        }
+    </style>
 </head>
+
 <body>
     <h1>Greenfield Holiday Project</h1>
     <form method="POST">
         <label for="text_input">Holiday demands</label>
-        <input type="text" id="text_input" name="text_input" required><br><br>
+        <input type="text" id="text_input" name="text_input" size="200" required><br><br>
         <input type="submit" value="Holiday!">
     </form>
     {% if result %}
