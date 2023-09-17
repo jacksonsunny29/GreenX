@@ -11,7 +11,17 @@
         <input type="submit" value="Holiday!">
     </form>
     {% if result %}
-    <p>Result: {{ result }}</p>
+    <h2>
+        Found
+    </h2>
+    <ul>
+        {% for (hpLink, distance, carbon, name) in result %}
+        <li>
+            <a href="{{ hpLink }}"> {{ name }} </a> at a distance of {{ distance }} km
+            and a carbon emission rating of {{ carbon.air }} by plane or {{ carbon.rail }} by rail
+        </li>
+        {% endfor %}
+    </ul>
     {% endif %}
 </body>
 </html>

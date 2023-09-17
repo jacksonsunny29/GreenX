@@ -28,4 +28,4 @@ class HotelFinder(object):
                     "rail": carbonA2B.calc_CarbonTrain(ZURICH_COORDS, (lat,long))
                 }
             )            
-        return [(*(hotelsID[i]), dists[i], emits[i]) for i in indeces]
+        return [(("https://www.hotelplan.ch/" + hotelsID[i][0]), int(dists[i]), emits[i], hotelsID[i][3]) for i in indeces]

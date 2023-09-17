@@ -43,6 +43,6 @@ for continent in data['geo']:
                                               parking, appartement, entertainment, ski]).astype(int) * 2 - 1) * 10
 
                     hotelsVectors.append(hotels_vector)
-                    hotelsID.append((hotels['publicId'], hotels["coordinates"], sustainabilityHeuristic))
+                    hotelsID.append((hotels['publicId'], hotels["coordinates"], sustainabilityHeuristic, hotels["name"]))
 
 hotelsMatrix = np.array(hotelsVectors)
