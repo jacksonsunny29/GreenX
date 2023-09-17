@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GreenX</title>
+
+    <style type="text/css">
+        h1 {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Greenfield Holiday Project</h1>
+    <form method="POST">
+        <label for="text_input">Holiday demands</label>
+        <input type="text" id="text_input" name="text_input" size="200" {% if prev %}value="{{ prev }}"{% endif %} required><br><br>
+        <input type="submit" value="Holiday!">
+    </form>
+    {% if result %}
+    <h2>
+        Found
+    </h2>
+    <ul>
+        {% for (hpLink, distance, carbon, name) in result %}
+        <li>
+            <a href="{{ hpLink }}"> {{ name }} </a> at a distance of {{ distance }} km
+            and a carbon emission rating of {{ carbon.air }} by plane or {{ carbon.rail }} by rail
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

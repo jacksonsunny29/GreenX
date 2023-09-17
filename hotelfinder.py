@@ -1,7 +1,11 @@
 from prompting import TextAnalyser
 import numpy as np
 from hotelRanker import hotelsID, hotelsMatrix
-from cal_latlongdist import haversine
+import carbonA2B
+from haversine import haversine
+
+ZURICH_COORDS = (47.4, 8.5)
+
 
 class HotelFinder(object):
 
@@ -12,13 +16,17 @@ class HotelFinder(object):
 
     def getNBestScorers(self, n):
         indeces = np.argsort(-self.scores)[:n]
-        lats = [hotelsID[i][1]['latitude'] for i in indeces]
-        longs = [hotelsID[i][1]['longitude'] for i in indeces]
-        # print(lats,longs)
-        dists=[]
-        for i,j in zip(lats,longs):
-            dist=haversine(float(i),float(j))
-            print(dist) 
-            dists.append(dist)
-        print(dists)
-        return [(*hotelsID[i], dists[i]) for i in indeces]
+        dists={}
+        emits={}
+        for i in indeces:
+            lat = hotelsID[i][1]['latitude']
+            long = hotelsID[i][1]['longitude']
+            dist=haversine(ZURICH_COORDS, (lat,long))
+            dists[i] = (dist)
+            emits[i] = (
+                {
+                    "air": carbonA2B.calc_CarbonFlight(ZURICH_COORDS, (lat,long)),
+                    "rail": carbonA2B.calc_CarbonTrain(ZURICH_COORDS, (lat,long))
+                }
+            )            
+        return [(("https://www.hotelplan.ch/" + hotelsID[i][0]), int(dists[i]), emits[i], hotelsID[i][3]) for i in indeces]

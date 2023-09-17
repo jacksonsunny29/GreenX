@@ -4,6 +4,7 @@ import numpy as np
 hotelsVectors = []
 hotelsID = []
 
+data = {}
 with open('fr.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
@@ -42,6 +43,6 @@ for continent in data['geo']:
                                               parking, appartement, entertainment, bar, ski]).astype(int) * 2 - 1) * 10
 
                     hotelsVectors.append(hotels_vector)
-                    hotelsID.append((hotels['publicId'], hotels["coordinates"], sustainabilityHeuristic))
+                    hotelsID.append((hotels['publicId'], hotels["coordinates"], sustainabilityHeuristic, hotels["name"]))
 
 hotelsMatrix = np.array(hotelsVectors)
