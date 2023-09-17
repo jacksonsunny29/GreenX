@@ -4,8 +4,9 @@ import numpy as np
 hotelsVectors = []
 hotelsID = []
 
-f = open('fr.json')
-data = json.load(f)
+data = {}
+with open('fr.json', 'r', encoding='utf-8') as f:
+    data = json.load(f)
 
 for continent in data['geo']:
     for countriesPage in continent['countries']['countriesPage']:
