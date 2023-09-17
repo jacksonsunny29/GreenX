@@ -6,6 +6,7 @@ from haversine import haversine
 
 ZURICH_COORDS = (47.4, 8.5)
 
+
 class HotelFinder(object):
 
     def __init__(self, inText) -> None:
