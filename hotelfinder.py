@@ -1,7 +1,7 @@
 from prompting import TextAnalyser
 import numpy as np
 from hotelRanker import hotelsID, hotelsMatrix
-
+from cal_latlongdist import haversine
 
 class HotelFinder(object):
 
@@ -12,4 +12,13 @@ class HotelFinder(object):
 
     def getNBestScorers(self, n):
         indeces = np.argsort(-self.scores)[:n]
-        return [hotelsID[i] for i in indeces]
+        lats = [hotelsID[i][1]['latitude'] for i in indeces]
+        longs = [hotelsID[i][1]['longitude'] for i in indeces]
+        # print(lats,longs)
+        dists=[]
+        for i,j in zip(lats,longs):
+            dist=haversine(float(i),float(j))
+            print(dist) 
+            dists.append(dist)
+        print(dists)
+        return [hotelsID[i] for i in indeces],dists
